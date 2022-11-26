@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="helloSpring" class="com.atguigu.spring.pojo.HelloSpring"/>
+
+    <bean id="studentOne" class="com.atguigu.spring.pojo.Student"/>
+
+    <!--    setter注入,通过类中的setter方法设置值-->
+    <bean id="studentTwo" class="com.atguigu.spring.pojo.Student">
+        <property name="stuId" value="1"/>
+        <property name="age" value="21"/>
+        <property name="gender" value="男"/>
+        <property name="stuName" value="阿伟"/>
+    </bean>
+
+    <!--    构造器赋值,name为指定属性名-->
+<!--    <bean id="studentThree" class="com.atguigu.spring.pojo.Student">-->
+<!--        <constructor-arg value="123" name="StuId"/>-->
+<!--        <constructor-arg value="awei" name="StuName"/>-->
+<!--        <constructor-arg value="123" name="age"/>-->
+<!--        <constructor-arg value="男" name="gender"/>-->
+<!--        <constructor-arg name="clazz">-->
+<!--            <null></null>-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
+
+    <!--    特殊字符处理,CD区中可存放任意特殊字符,会原样解析-->
+    <bean id="studentFour" class="com.atguigu.spring.pojo.Student">
+        <property name="stuId" value="10"/>
+        <property name="stuName">
+            <value><![CDATA[<你好>]]></value>
+        </property>
+        <property name="gender" value="男"/>
+        <property name="age" value="20"/>
+    </bean>
+
+    <!--给类字段赋值-->
+    <bean id="studentFive" class="com.atguigu.spring.pojo.Student">
+        <property name="stuId" value="10"/>
+        <property name="stuName">
+            <value><![CDATA[<你好>]]></value>
+        </property>
+        <property name="gender" value="男"/>
+        <property name="age" value="20"/>
+        <property name="clazz" ref="clazzOne"/>
+    </bean>
+
+    <bean id="clazzOne" class="com.atguigu.spring.pojo.Clazz">
+        <property name="cid" value="20"/>
+        <property name="cname" value="204班"/>
+        <property name="studentList" ref="studentList"/>
+    </bean>
+
+
+    <!--给数组赋值-->
+    <bean id="studentSix" class="com.atguigu.spring.pojo.Student">
+        <property name="stuId" value="10"/>
+        <property name="stuName">
+            <value><![CDATA[<你好>]]></value>
+        </property>
+        <property name="gender" value="男"/>
+        <property name="age" value="20"/>
+        <property name="clazz" ref="clazzOne"/>
+        <property name="clazzs">
+            <array>
+<!--                如果数组内放的是基本字段,则使用value-->
+<!--                <value>唱歌</value>-->
+<!--                <value>跳舞</value>-->
+<!--                <value>Rap</value>-->
+<!--                <value>篮球</value>-->
+
+<!--                如果放的是类就用ref标签,bean放的是被引用类的标签-->
+                <ref bean="clazzOne"/>
+            </array>
+        </property>
+
+
+    </bean>
+
+    <bean id="studentSeven" class="com.atguigu.spring.pojo.Student">
+        <property name="stuId" value="10"/>
+        <property name="stuName">
+            <value><![CDATA[<你好>]]></value>
+        </property>
+        <property name="gender" value="男"/>
+        <property name="age" value="20"/>
+        <property name="clazz" ref="clazzOne"/>
+        <property name="teacherMap" ref="teacherMap"/>
+    </bean>
+
+    <bean id="teacherOne" class="com.atguigu.spring.pojo.Teacher">
+        <property name="TId" value="20"/>
+        <property name="TName" value="健康哥哥"/>
+    </bean>
+
+    <bean id="teacherTwo" class="com.atguigu.spring.pojo.Teacher">
+        <property name="TId" value="21"/>
+        <property name="TName" value="老师2"/>
+    </bean>
+
+    <util:list id="studentList" >
+        <ref bean="studentOne"></ref>
+        <ref bean="studentTwo"></ref>
+        <ref bean="studentFour"></ref>
+    </util:list>
+
+    <util:map id="teacherMap">
+        <entry  key="10086" value-ref="teacherOne"></entry>
+        <entry  key="10087" value-ref="teacherTwo"></entry>
+    </util:map>
+</beans>

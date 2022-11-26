@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.atguigu.spring">
+        <!--        exclude-filter标签为排除标签,将expression内的值排除在扫描的范围外-->
+        <!--        assignable-指定扫描某个接口派生出来的类
+        annotation-指定扫描使用某个注解的类
+        aspectj-指定扫描AspectJ表达式相匹配的类
+        custom-指定扫描自定义的实现了
+        org.springframework.core.type.filter.TypeFilter接口的类
+        regex-指定扫描符合正则表达式的类-->
+<!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+<!--        <context:exclude-filter type="assignable" expression="com.atguigu.spring.dao.UserDao"/>-->
+    </context:component-scan>
+
+
+</beans>
